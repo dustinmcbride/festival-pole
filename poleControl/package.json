@@ -4,11 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": " NODE_ENV=DEVELOPMENT nodemon --exec npm run babel-node -- ./src/index.js",
+    "babel-node": "./node_modules/@babel/node/bin/babel-node.js",
+    "build": "./node_modules/@babel/cli/bin/babel.js src --out-dir build",
+    "prebuild": "rm -rf build/*",
+    "start:prod": "node ./build/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/node": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-async-to-generator": "^7.1.0",
+    "@babel/plugin-transform-destructuring": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-es2017": "^7.0.0-beta.53",
+    "serialport": "^7.0.2"
   }
 }
