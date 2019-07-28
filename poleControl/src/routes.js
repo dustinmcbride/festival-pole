@@ -1,4 +1,5 @@
 import config from './config'
+import shutdown from './utils/shutdown'
 
 export default class Routes {
   constructor(board) {
@@ -33,4 +34,9 @@ export default class Routes {
     res.send(state)
   }
 
+  async shutDown (req, res) {
+    shutdown(function(error, stdout, stderr){
+      res.send({error, stdout, stderr})
+    });
+  }
 }

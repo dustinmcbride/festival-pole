@@ -1,0 +1,12 @@
+body {
+  margin: 17px;
+}
+
+#slider {
+  margin: 25px 0;
+}
+
+.loop-container .btn {
+  margin-right: 14px;
+  margin-top: 10px;
+}

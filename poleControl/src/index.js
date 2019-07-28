@@ -14,6 +14,7 @@ app.use('/', express.static(path.join(__dirname, 'static')));
 app.get('/set/current-loop/:value', routes.setCurrentLoop)
 app.get('/set/brightness/:value', routes.setBrightness)
 app.get('/get/state', routes.getState)
+app.get('/system/shutdown', routes.shutDown)
 app.listen(config.port, () => logger.info(`Pole Control listening on port ${config.port}!`))
 
 const init = async () => {
