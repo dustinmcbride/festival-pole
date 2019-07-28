@@ -1,0 +1,35 @@
+# The production directory
+TARGET="/home/pi/srv/www/poleControl"
+# A temporary directory for deployment
+TEMP="/home/pi/srv/tmp/festival-pole"
+# The Git repo
+REPO="/home/pi/srv/festival-pole.git"
+
+#Stope PM
+echo 'post-receive: stopping pm2'
+cd $TARGET
+npm run prod:stop
+
+echo 'post-receive: delete all project files expect node_modules (save time and sd card writes)'
+cd $TARGET
+RM_ARGS="-rfv !(\"node_modules\")"
+rm $RM_ARGS
+
+
+echo 'post-receive: checkingout project file to temp  '
+rm -rf $TEMP
+mkdir -p $TEMP
+git --work-tree=$TEMP --git-dir=$REPO checkout -f
+
+
+echo 'post-receive: copy temp files to production folder'
+cd $TEMP/poleControl
+cp -a . $TARGET
+cd $TARGET
+
+echo 'post-receive: npm install'
+#./node_modules/pm2/bin/pm2
+npm i
+
+echo 'post-receive: start pm2'
+npm run start:prod
